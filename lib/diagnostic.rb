@@ -4,6 +4,15 @@ require 'rails_helper'
 # The tests you build for this diagnostic are not expected to pass.
 # Merely provide a test for each given scenario.
 
+def examples
+  Example.all
+end
+
+def example
+  Example.first
+end
+
+
 #
 # Question 1
 #
@@ -135,6 +144,32 @@ RSpec.describe ExamplesController do
 
       expect(response).to be_successful
       expect(response.body).to be_empty
+    end
+  end
+end
+
+#
+# Question 7
+#
+# Test that the Example model has an association with an
+# `other` model. You'll have to build an `association` model
+# on your own.
+#
+# Also, write a test to ensure that your Example
+# model validates the presence of `text` for newly
+# created examples.
+
+RSpec.describe Example do
+  describe 'associations' do
+    # association method here
+    def association
+      described_class.reflect_on_association(:others)
+    end
+
+    # test association with `other` here
+    it 'has an association with comments' do
+      expect(association).to_not be_nil
+      expect(association.name).to eq(:comments)
     end
   end
 end
